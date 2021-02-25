@@ -1,7 +1,9 @@
+import * as Realm from 'realm-web'
 import { createAction } from '@reduxjs/toolkit'
 import { InitialTodo, Todo } from '../../types'
 
 export const createTodo2 = createAction<{ todo: InitialTodo }>('todos2/create')
+export const clearAll2 = createAction('todos2/clear')
 
 export const fetchTodos2 = createAction('todos2/fetch')
 export const fetchTodos2Request = createAction('todos2/fetch/request')
@@ -10,3 +12,4 @@ export const fetchTodos2Failure = createAction('todos2/fetch/failure')
 
 export const openTodos2Watch = createAction('todos2/watch/open')
 export const addTodo2FromWatch = createAction<{ todo: Todo }>('todos2/watch/add')
+export const removeTodo2FromWatch = createAction<{ _id: Realm.BSON.ObjectId }>('todos2/watch/remove')

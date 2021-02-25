@@ -25,6 +25,10 @@ const TodoSelection: React.FC = () => {
 		}))
 	}
 
+	const handleClearTodo1 = () => {
+		dispatch(todos1Actions.clearAll1())
+	}
+
 	const handleCreateTodo2 = () => {
 		dispatch(todos2Actions.createTodo2({
 			todo: {
@@ -32,6 +36,10 @@ const TodoSelection: React.FC = () => {
 				completed: false
 			}
 		}))
+	}
+
+	const handleClearTodo2 = () => {
+		dispatch(todos2Actions.clearAll2())
 	}
 
 	const todo1Items = todos1.map((todo1, index) => (
@@ -55,15 +63,26 @@ const TodoSelection: React.FC = () => {
 	return (
 		<Grid container spacing={2}>
 			<Grid item xs={12}>
-				<div style={{ display: 'flex', padding: 8, alignItems: 'center', flexDirection: 'column' }}>
-					<Typography variant="h6">Open devtools to view change stream</Typography>
-				</div>
+				<Paper>
+					<div style={{ display: 'flex', padding: 8, flexDirection: 'column' }}>
+						<Typography variant="h6">Open devtools to view change stream</Typography>
+						<Typography>Steps to reproduce:</Typography>
+						<Typography>1. Click both add todo buttons</Typography>
+						<Typography>2. Wait at least 60 seconds</Typography>
+						<Typography gutterBottom>3. Click both add todo buttons again</Typography>
+						<Typography gutterBottom>Clicking the right button (todos with function rule) should now trigger the <Typography color="secondary" variant="caption">WatchError: execution time limit exceeded</Typography> error. The list will no longer be updated when clicking either one of the right buttons.</Typography>
+						<Typography gutterBottom>The left button should not trigger an error and keep working.</Typography>
+					</div>
+				</Paper>
 			</Grid>
 			<Grid item xs={6}>
 				<Paper>
 					<div style={{ display: 'flex', padding: 8, alignItems: 'center', flexDirection: 'column' }}>
 						<Typography gutterBottom variant="h6">Todos without function rule</Typography>
-						<Button variant="outlined" color="primary" onClick={handleCreateTodo1}>Add todo</Button>
+					</div>
+					<div style={{ display: 'flex', padding: 8, alignItems: 'center', flexDirection: 'row' }}>
+						<Button style={{ flex: 1, marginRight: 16 }} variant="outlined" color="primary" onClick={handleCreateTodo1}>Add todo</Button>
+						<Button variant="outlined" color="secondary" onClick={handleClearTodo1}>Clear</Button>
 					</div>
 					<Divider />
 					<List disablePadding>{(isLoading1) ? <p>Loading...</p> : todo1Items}</List>
@@ -73,7 +92,10 @@ const TodoSelection: React.FC = () => {
 				<Paper>
 					<div style={{ display: 'flex', padding: 8, alignItems: 'center', flexDirection: 'column' }}>
 						<Typography gutterBottom variant="h6">Todos with function rule</Typography>
-						<Button variant="outlined" color="primary" onClick={handleCreateTodo2}>Add todo</Button>
+					</div>
+					<div style={{ display: 'flex', padding: 8, alignItems: 'center', flexDirection: 'row' }}>
+						<Button style={{ flex: 1, marginRight: 16 }} variant="outlined" color="primary" onClick={handleCreateTodo2}>Add todo</Button>
+						<Button variant="outlined" color="secondary" onClick={handleClearTodo2}>Clear</Button>
 					</div>
 					<Divider />
 					<List disablePadding>{(isLoading2) ? <p>Loading...</p> : todo2Items}</List>

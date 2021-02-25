@@ -1,7 +1,7 @@
 import { all, call, fork, put, take, takeEvery } from 'redux-saga/effects'
 import * as actions from './actions'
 import * as realmStreams from '../../realm/streams/todo'
-import { addTodo2, getTodos2 } from '../../realm/todo'
+import { addTodo2, clearAll2, getTodos2 } from '../../realm/todo'
 import { Todo } from '../../types'
 
 // Will open the todos watch
@@ -48,10 +48,27 @@ function* watchCreate() {
 	yield takeEvery(actions.createTodo2, create)
 }
 
+// Will clearAll a todo
+function* clearAll(action: any): any {
+	if (actions.clearAll2.match(action)) {
+		try {
+			yield call(clearAll2)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+}
+
+// Will handle every clearAll action
+function* watchClearAll() {
+	yield takeEvery(actions.clearAll2, clearAll)
+}
+
 export default function* rootSaga(): any {
 	yield all([
 		fetchAll,
 		openTodos2Watch,
-		watchCreate
+		watchCreate,
+		watchClearAll
 	].map(saga => fork(saga)))
 }

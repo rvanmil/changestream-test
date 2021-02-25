@@ -15,6 +15,9 @@ const todosMapReducer = createReducer(new Map<string, Todo>(), builder => builde
 	})
 	.addCase(actions.addTodo2FromWatch, (state, action) => {
 		state.set(action.payload.todo._id.toHexString(), action.payload.todo)
+	})
+	.addCase(actions.removeTodo2FromWatch, (state, action) => {
+		state.delete(action.payload._id.toHexString())
 	}))
 
 const metaReducer = createReducer({ isLoading: false }, builder => builder

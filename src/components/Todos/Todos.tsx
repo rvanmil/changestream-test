@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Checkbox, Divider, Grid, List, ListItem, ListItemSecondaryAction, ListItemText, Paper, Typography } from '@material-ui/core'
+import { Button, Checkbox, Divider, Grid, Link, List, ListItem, ListItemSecondaryAction, ListItemText, Paper, Typography } from '@material-ui/core'
 import * as todos1Actions from '../../redux/todo1/actions'
 import * as todos2Actions from '../../redux/todo2/actions'
 import { RootState } from '../../redux/rootState'
@@ -72,6 +72,7 @@ const TodoSelection: React.FC = () => {
 						<Typography gutterBottom>3. Click both add todo buttons again</Typography>
 						<Typography gutterBottom>Clicking the right button (todos with function rule) should now trigger the <Typography color="secondary" variant="caption">WatchError: execution time limit exceeded</Typography> error. The list will no longer be updated when clicking either one of the right buttons.</Typography>
 						<Typography gutterBottom>The left button should not trigger an error and keep working.</Typography>
+						<Link href="https://github.com/rvanmil/changestream-test" target="_blank" rel="noopener">Source</Link>
 					</div>
 				</Paper>
 			</Grid>
